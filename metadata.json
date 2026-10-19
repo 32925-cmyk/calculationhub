@@ -1,0 +1,6 @@
+{
+  "name": "CalculationHub Pro - Universal Fast Calculator & Financial Suite",
+  "description": "Comprehensive, ultra-fast online calculation suite for CalculationHub.com featuring 47+ financial, health, scientific, math, and conversion calculators with AdSense-ready placements.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
