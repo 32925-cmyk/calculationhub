@@ -1,18 +1,13 @@
 import React, { useState } from 'react';
 import { BookOpen, CheckCircle, HelpCircle, ChevronDown, ChevronUp, Hash, Award, Table } from 'lucide-react';
-import { SeoArticleData, AdConfig } from '../types/calculator';
-import { AdBanner } from './AdBanner';
+import { SeoArticleData } from '../types/calculator';
 
 interface SeoArticleProps {
   article: SeoArticleData;
-  adConfig: AdConfig;
-  onOpenAdSettings?: () => void;
 }
 
 export const SeoArticle: React.FC<SeoArticleProps> = ({
   article,
-  adConfig,
-  onOpenAdSettings,
 }) => {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
@@ -153,15 +148,6 @@ export const SeoArticle: React.FC<SeoArticleProps> = ({
           ))}
         </section>
       )}
-
-      {/* IN-CONTENT ADSENSE SLOT */}
-      <div className="my-8">
-        <AdBanner
-          placement="in-content"
-          config={adConfig}
-          onOpenSettings={onOpenAdSettings}
-        />
-      </div>
 
       {/* REMAINING SECTIONS */}
       {article.headings.sections.slice(1).map((sec, idx) => (

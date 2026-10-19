@@ -9,6 +9,7 @@ import {
   ChevronDown,
   Layers,
   ArrowRight,
+  Download,
 } from 'lucide-react';
 import { CalculatorDefinition } from '../types/calculator';
 import { CALCULATORS } from '../data/calculators';
@@ -17,13 +18,11 @@ import { CATEGORIES } from '../data/categories';
 interface NavbarProps {
   currentView: string;
   onNavigate: (view: string, param?: string) => void;
-  onOpenAdSettings: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   currentView,
   onNavigate,
-  onOpenAdSettings,
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -62,6 +61,23 @@ export const Navbar: React.FC<NavbarProps> = ({
     setSearchQuery('');
     setMobileMenuOpen(false);
     onNavigate('calculator', calcId);
+  };
+
+  const handleDownloadZip = async () => {
+    try {
+      const res = await fetch('/project-update.zip');
+      const blob = await res.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'calculationhub-latest.zip';
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+    } catch {
+      window.location.href = '/project-update.zip';
+    }
   };
 
   return (
@@ -151,6 +167,15 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* ACTIONS */}
           <div className="flex items-center gap-2">
             <button
+              onClick={handleDownloadZip}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs transition-all shadow-md hover:shadow-emerald-500/20 active:scale-95 cursor-pointer"
+              title="Download latest updated code for your PC / GitHub"
+            >
+              <Download className="w-4 h-4" />
+              <span className="hidden sm:inline">Download ZIP</span>
+            </button>
+
+            <button
               onClick={() => {
                 setIsSearchOpen(true);
                 setTimeout(() => searchInputRef.current?.focus(), 50);
@@ -161,14 +186,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <Search className="w-4 h-4" />
             </button>
 
-            <button
-              onClick={onOpenAdSettings}
-              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-amber-300 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 rounded-xl transition-colors cursor-pointer"
-              title="Configure Google AdSense"
-            >
-              <DollarSign className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">AdSense Settings</span>
-            </button>
+
 
             {/* Mobile Hamburger */}
             <button

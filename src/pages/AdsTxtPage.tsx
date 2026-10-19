@@ -3,14 +3,14 @@ import { FileText, Copy, Check, Download, ShieldCheck, HelpCircle } from 'lucide
 import { AdConfig } from '../types/calculator';
 
 interface AdsTxtPageProps {
-  adConfig: AdConfig;
+  initialPublisherId?: string;
 }
 
-export const AdsTxtPage: React.FC<AdsTxtPageProps> = ({ adConfig }) => {
+export const AdsTxtPage: React.FC<AdsTxtPageProps> = ({ initialPublisherId = 'pub-1234567890123456' }) => {
+  const [pubInput, setPubInput] = useState(initialPublisherId.replace('ca-pub-', '').replace('pub-', ''));
   const [copied, setCopied] = useState(false);
 
-  const rawPubId = adConfig.publisherId.replace('ca-pub-', '').replace('pub-', '');
-  const cleanPubId = rawPubId ? `pub-${rawPubId}` : 'pub-XXXXXXXXXXXXXXXX';
+  const cleanPubId = pubInput.trim() ? `pub-${pubInput.trim()}` : 'pub-1234567890123456';
   const adsTxtString = `google.com, ${cleanPubId}, DIRECT, f08c47fec0942fa0`;
 
   const handleCopy = () => {
@@ -20,7 +20,7 @@ export const AdsTxtPage: React.FC<AdsTxtPageProps> = ({ adConfig }) => {
   };
 
   const handleDownload = () => {
-    const blob = new Blob([adsTxtString], { type: 'text/plain' });
+    const blob = new Blob([adsTxtString + '\n'], { type: 'text/plain' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
@@ -68,6 +68,24 @@ export const AdsTxtPage: React.FC<AdsTxtPageProps> = ({ adConfig }) => {
                 <Download className="w-3.5 h-3.5" />
                 <span>Download ads.txt</span>
               </button>
+            </div>
+          </div>
+
+          <div className="space-y-1.5 pt-2">
+            <label className="text-xs font-semibold text-slate-300 block">
+              Customize with your Publisher ID (numbers only or pub-XXXX):
+            </label>
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-mono text-slate-400 bg-slate-950 px-2.5 py-2 rounded-lg border border-slate-800">
+                pub-
+              </span>
+              <input
+                type="text"
+                value={pubInput}
+                onChange={(e) => setPubInput(e.target.value.replace(/[^0-9]/g, ''))}
+                placeholder="1234567890123456"
+                className="flex-1 max-w-xs px-3 py-2 bg-slate-950 border border-slate-700 rounded-lg text-white font-mono text-xs focus:outline-none focus:border-indigo-500"
+              />
             </div>
           </div>
 

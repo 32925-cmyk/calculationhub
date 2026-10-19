@@ -19,21 +19,16 @@ import {
 } from 'lucide-react';
 import { CALCULATORS } from '../data/calculators';
 import { CATEGORIES } from '../data/categories';
-import { CalculatorCategory, AdConfig } from '../types/calculator';
-import { AdBanner } from '../components/AdBanner';
+import { CalculatorCategory } from '../types/calculator';
 
 interface HomePageProps {
   onSelectCalculator: (calcId: string) => void;
   onSelectCategory: (catId: CalculatorCategory) => void;
-  adConfig: AdConfig;
-  onOpenAdSettings: () => void;
 }
 
 export const HomePage: React.FC<HomePageProps> = ({
   onSelectCalculator,
   onSelectCategory,
-  adConfig,
-  onOpenAdSettings,
 }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [filterQuery, setFilterQuery] = useState<string>('');
@@ -122,14 +117,7 @@ export const HomePage: React.FC<HomePageProps> = ({
         </div>
       </section>
 
-      {/* TOP LEADERBOARD AD BANNER */}
-      <div className="max-w-7xl mx-auto px-4">
-        <AdBanner
-          placement="header"
-          config={adConfig}
-          onOpenSettings={onOpenAdSettings}
-        />
-      </div>
+
 
       {/* FEATURED / POPULAR CALCULATORS SECTION */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">

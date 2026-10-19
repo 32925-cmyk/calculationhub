@@ -1,22 +1,17 @@
 import React from 'react';
 import { ArrowLeft, ArrowRight, Layers } from 'lucide-react';
-import { CalculatorCategory, AdConfig } from '../types/calculator';
+import { CalculatorCategory } from '../types/calculator';
 import { CATEGORIES } from '../data/categories';
 import { CALCULATORS } from '../data/calculators';
-import { AdBanner } from '../components/AdBanner';
 
 interface CategoryPageProps {
   categoryId: CalculatorCategory;
   onNavigate: (view: string, param?: string) => void;
-  adConfig: AdConfig;
-  onOpenAdSettings: () => void;
 }
 
 export const CategoryPage: React.FC<CategoryPageProps> = ({
   categoryId,
   onNavigate,
-  adConfig,
-  onOpenAdSettings,
 }) => {
   const category = CATEGORIES.find((c) => c.id === categoryId) || CATEGORIES[0];
   const calculators = CALCULATORS.filter((c) => c.category === category.id);
@@ -44,13 +39,6 @@ export const CategoryPage: React.FC<CategoryPageProps> = ({
           {category.description}
         </p>
       </div>
-
-      {/* AD LEADERBOARD */}
-      <AdBanner
-        placement="header"
-        config={adConfig}
-        onOpenSettings={onOpenAdSettings}
-      />
 
       {/* CALCULATOR LIST */}
       <div className="space-y-4">

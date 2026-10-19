@@ -5,12 +5,12 @@ import { CALCULATORS } from '../data/calculators';
 
 interface FooterProps {
   onNavigate: (view: string, param?: string) => void;
-  onOpenAdSettings: () => void;
+  onOpenCookieSettings?: () => void;
 }
 
 export const Footer: React.FC<FooterProps> = ({
   onNavigate,
-  onOpenAdSettings,
+  onOpenCookieSettings,
 }) => {
   const featuredCalcs = CALCULATORS.filter((c) => c.isFeatured).slice(0, 8);
 
@@ -95,6 +95,24 @@ export const Footer: React.FC<FooterProps> = ({
               </li>
               <li>
                 <button
+                  onClick={() => onNavigate('cookies')}
+                  className="hover:text-white transition-colors cursor-pointer text-left flex items-center gap-1"
+                >
+                  <span>Cookie Policy</span>
+                </button>
+              </li>
+              {onOpenCookieSettings && (
+                <li>
+                  <button
+                    onClick={onOpenCookieSettings}
+                    className="hover:text-indigo-400 transition-colors cursor-pointer text-left flex items-center gap-1 text-slate-300"
+                  >
+                    <span>Cookie Preferences</span>
+                  </button>
+                </li>
+              )}
+              <li>
+                <button
                   onClick={() => onNavigate('terms')}
                   className="hover:text-white transition-colors cursor-pointer text-left flex items-center gap-1"
                 >
@@ -127,19 +145,20 @@ export const Footer: React.FC<FooterProps> = ({
               </li>
               <li>
                 <button
-                  onClick={() => onNavigate('ads-txt')}
-                  className="hover:text-amber-400 transition-colors cursor-pointer text-left flex items-center gap-1 text-amber-400/90"
+                  onClick={() => onNavigate('adsense-guide')}
+                  className="text-emerald-400 hover:text-emerald-300 transition-colors cursor-pointer text-left flex items-center gap-1 font-medium"
                 >
-                  <span>ads.txt Verification</span>
+                  <span>AdSense & Auto Ads Guide</span>
                   <ArrowUpRight className="w-3 h-3" />
                 </button>
               </li>
               <li>
                 <button
-                  onClick={onOpenAdSettings}
-                  className="text-indigo-400 hover:text-indigo-300 transition-colors cursor-pointer text-left"
+                  onClick={() => onNavigate('ads-txt')}
+                  className="hover:text-amber-400 transition-colors cursor-pointer text-left flex items-center gap-1 text-amber-400/90"
                 >
-                  Publisher Control Center
+                  <span>ads.txt Verification</span>
+                  <ArrowUpRight className="w-3 h-3" />
                 </button>
               </li>
             </ul>

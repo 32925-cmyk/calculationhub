@@ -8,25 +8,20 @@ import {
   ArrowLeft,
   Sparkles,
 } from 'lucide-react';
-import { CalculatorDefinition, AdConfig } from '../types/calculator';
+import { CalculatorDefinition } from '../types/calculator';
 import { CALCULATORS } from '../data/calculators';
 import { SEO_ARTICLES } from '../data/articles';
 import { CalculatorCard } from '../components/CalculatorCard';
 import { SeoArticle } from '../components/SeoArticle';
-import { AdBanner } from '../components/AdBanner';
 
 interface CalculatorPageProps {
   calculatorId: string;
   onNavigate: (view: string, param?: string) => void;
-  adConfig: AdConfig;
-  onOpenAdSettings: () => void;
 }
 
 export const CalculatorPage: React.FC<CalculatorPageProps> = ({
   calculatorId,
   onNavigate,
-  adConfig,
-  onOpenAdSettings,
 }) => {
   const calculator = CALCULATORS.find((c) => c.id === calculatorId) || CALCULATORS[0];
   const article = SEO_ARTICLES[calculator.id];
@@ -138,13 +133,6 @@ export const CalculatorPage: React.FC<CalculatorPageProps> = ({
         <span className="text-slate-200 font-semibold">{calculator.name}</span>
       </nav>
 
-      {/* TOP LEADERBOARD AD */}
-      <AdBanner
-        placement="header"
-        config={adConfig}
-        onOpenSettings={onOpenAdSettings}
-      />
-
       {/* MAIN TWO-COLUMN LAYOUT */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* LEFT / CENTER CONTENT: CALCULATOR + 1200-1400 WORD ARTICLE */}
@@ -153,23 +141,12 @@ export const CalculatorPage: React.FC<CalculatorPageProps> = ({
           <CalculatorCard calculator={calculator} />
 
           {/* ACCOMPANYING IN-DEPTH SEO ARTICLE (1,200 - 1,400 words) */}
-          <SeoArticle
-            article={fallbackArticle}
-            adConfig={adConfig}
-            onOpenAdSettings={onOpenAdSettings}
-          />
+          <SeoArticle article={fallbackArticle} />
         </div>
 
-        {/* RIGHT SIDEBAR: ADSENSE RAIL + RELATED CALCULATORS */}
+        {/* RIGHT SIDEBAR: RELATED CALCULATORS & QUALITY STANDARDS */}
         <aside className="lg:col-span-4 space-y-6">
-          {/* SIDEBAR SKYSCRAPER AD */}
           <div className="sticky top-20 space-y-6">
-            <AdBanner
-              placement="sidebar"
-              config={adConfig}
-              onOpenSettings={onOpenAdSettings}
-            />
-
             {/* RELATED CALCULATORS BOX */}
             <div className="p-5 rounded-2xl bg-slate-900 border border-slate-800 space-y-4">
               <div className="flex items-center justify-between border-b border-slate-800 pb-3">
