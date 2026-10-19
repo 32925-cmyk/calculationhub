@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CalculationHub</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <h1>CalculationHub</h1>
+      <p class="subtitle">Fast, client-side calculators for common needs.</p>
+
+      <section class="card" aria-labelledby="basic-heading">
+        <h2 id="basic-heading">Basic</h2>
+        <div class="grid basic-grid">
+          <input id="basic-a" type="number" step="any" placeholder="First number" />
+          <select id="basic-op" aria-label="Operation">
+            <option value="add">+</option>
+            <option value="subtract">−</option>
+            <option value="multiply">×</option>
+            <option value="divide">÷</option>
+            <option value="power">xʸ</option>
+          </select>
+          <input id="basic-b" type="number" step="any" placeholder="Second number" />
+          <button id="basic-calc">Calculate</button>
+        </div>
+        <p id="basic-result" class="result">Result: —</p>
+      </section>
+
+      <section class="card" aria-labelledby="scientific-heading">
+        <h2 id="scientific-heading">Scientific</h2>
+        <div class="grid">
+          <input id="scientific-value" type="number" step="any" placeholder="Value" />
+          <select id="scientific-op" aria-label="Scientific operation">
+            <option value="sqrt">Square root</option>
+            <option value="square">Square</option>
+            <option value="sin">Sine (degrees)</option>
+            <option value="cos">Cosine (degrees)</option>
+            <option value="tan">Tangent (degrees)</option>
+            <option value="log10">Log10</option>
+          </select>
+          <button id="scientific-calc">Calculate</button>
+        </div>
+        <p id="scientific-result" class="result">Result: —</p>
+      </section>
+
+      <section class="card" aria-labelledby="finance-heading">
+        <h2 id="finance-heading">Finance (Simple Interest)</h2>
+        <div class="grid">
+          <input id="finance-principal" type="number" step="any" min="0" placeholder="Principal" />
+          <input id="finance-rate" type="number" step="any" min="0" placeholder="Rate % per year" />
+          <input id="finance-time" type="number" step="any" min="0" placeholder="Time (years)" />
+          <button id="finance-calc">Calculate</button>
+        </div>
+        <p id="finance-result" class="result">Result: —</p>
+      </section>
+
+      <section class="card" aria-labelledby="health-heading">
+        <h2 id="health-heading">Health (BMI)</h2>
+        <div class="grid">
+          <input id="bmi-weight" type="number" step="any" min="0" placeholder="Weight (kg)" />
+          <input id="bmi-height" type="number" step="any" min="0" placeholder="Height (cm)" />
+          <button id="bmi-calc">Calculate</button>
+        </div>
+        <p id="bmi-result" class="result">Result: —</p>
+      </section>
+
+      <section class="card" aria-labelledby="unit-heading">
+        <h2 id="unit-heading">Unit Converter</h2>
+        <div class="grid">
+          <input id="unit-value" type="number" step="any" placeholder="Value" />
+          <select id="unit-type" aria-label="Conversion type">
+            <option value="km-to-mi">Kilometers → Miles</option>
+            <option value="mi-to-km">Miles → Kilometers</option>
+            <option value="c-to-f">Celsius → Fahrenheit</option>
+            <option value="f-to-c">Fahrenheit → Celsius</option>
+          </select>
+          <button id="unit-calc">Convert</button>
+        </div>
+        <p id="unit-result" class="result">Result: —</p>
+      </section>
+    </main>
+
+    <script src="/app.js" defer></script>
+  </body>
+</html>
